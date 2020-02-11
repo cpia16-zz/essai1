@@ -1,0 +1,619 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project name="PostgreSQL" id="Project_597ceff" template="Default" database="PostgreSQL" >
+	<schema name="GEO_FREE" catalogname="SIG_TEST" schemaname="GEO_FREE" >
+		<table name="artere" >
+			<column name="geom" type="geometry" decimal="0" jt="1111" />
+			<column name="id_artere" type="integer" jt="4" mandatory="y" />
+			<column name="fk_noeud-a" type="integer" length="10" decimal="0" jt="4" />
+			<column name="fk_noeud-b" type="integer" length="10" decimal="0" jt="4" />
+			<column name="voie_artere" type="varchar" decimal="0" jt="12" />
+			<column name="nature_artere" type="varchar" decimal="0" jt="12" />
+			<column name="fk_mode-pose" type="integer" length="10" decimal="0" jt="4" />
+			<column name="fk_type-construction" type="integer" length="10" decimal="0" jt="4" />
+			<column name="longueur" type="numeric" decimal="0" jt="2" />
+			<column name="fourreau_total" type="varchar" length="2" decimal="0" jt="12" />
+			<column name="fourreau_utilise" type="varchar" length="2" decimal="0" jt="12" />
+			<column name="cable_nombre" type="varchar" length="2" decimal="0" jt="12" />
+			<column name="date_install" type="date" length="13" decimal="0" jt="91" />
+			<column name="fk_proprio" type="integer" length="10" decimal="0" jt="4" />
+			<column name="fk_geoloc-class" type="integer" length="10" decimal="0" jt="4" />
+			<column name="fk_source-geoloc" type="integer" length="10" decimal="0" jt="4" />
+			<column name="date_maj" type="date" length="13" decimal="0" jt="91" />
+			<column name="fk_user-maj" type="integer" length="10" decimal="0" jt="4" />
+			<column name="fk_commune" type="integer" length="10" decimal="0" jt="4" />
+			<index name="pk_artere_id_artere" unique="PRIMARY_KEY" >
+				<column name="id_artere" />
+			</index>
+			<index name="idx_artere_fk_proprio" unique="NORMAL" >
+				<column name="fk_proprio" />
+			</index>
+			<index name="unq_artere_fk_commune" unique="UNIQUE" >
+				<column name="fk_commune" />
+			</index>
+			<fk name="fk_artere_noeud_a" to_schema="GEO_FREE" to_table="noeud" >
+				<fk_column name="fk_noeud-a" pk="id_noeud" />
+			</fk>
+			<fk name="fk_artere_noeud_b" to_schema="GEO_FREE" to_table="noeud" >
+				<fk_column name="fk_noeud-b" pk="id_noeud" />
+			</fk>
+			<fk name="fk_artere_mode_pose" to_schema="GEO_FREE" to_table="mode_pose" >
+				<fk_column name="fk_mode-pose" pk="id_mode_pose" />
+			</fk>
+			<fk name="fk_artere_type-construction" to_schema="GEO_FREE" to_table="type-construction" >
+				<fk_column name="fk_type-construction" pk="id_type-construction" />
+			</fk>
+			<fk name="fk_artere_proprio-gestion" to_schema="GEO_FREE" to_table="proprio-gestion" >
+				<fk_column name="fk_proprio" pk="id_proprio-gestion" />
+			</fk>
+			<fk name="fk_artere_geoloc-class" to_schema="GEO_FREE" to_table="geoloc-class" >
+				<fk_column name="fk_geoloc-class" pk="id_geoloc-class" />
+			</fk>
+			<fk name="fk_artere_source-geoloc" to_schema="GEO_FREE" to_table="source-geoloc" >
+				<fk_column name="fk_source-geoloc" pk="id_source-geoloc" />
+			</fk>
+			<fk name="fk_artere_commune" to_schema="GEO_FREE" to_table="commune" >
+				<fk_column name="fk_commune" pk="id_commune" />
+			</fk>
+			<fk name="fk_artere_user" to_schema="GEO_FREE" to_table="user" >
+				<fk_column name="fk_user-maj" pk="id_user" />
+			</fk>
+		</table>
+		<table name="bpe" >
+			<column name="id_bpe" type="serial" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="fk_noeud" type="integer" length="10" decimal="0" jt="4" />
+			<column name="fk_chambre" type="integer" length="10" decimal="0" jt="4" />
+			<column name="marque" type="varchar" length="30" decimal="0" jt="12" />
+			<column name="model" type="varchar" length="20" decimal="0" jt="12" />
+			<column name="capacite" type="varchar" length="3" decimal="0" jt="12" />
+			<column name="capa_epissure" type="varchar" length="4" decimal="0" jt="12" />
+			<column name="nombre_cassette" type="varchar" length="3" decimal="0" jt="12" />
+			<column name="fk_proprio" type="integer" length="10" decimal="0" jt="4" />
+			<column name="fk_gestion" type="integer" length="10" decimal="0" jt="4" />
+			<column name="date_maj" type="date" length="13" decimal="0" jt="91" />
+			<column name="fk_user-maj" type="integer" length="10" decimal="0" jt="4" />
+			<index name="bpe_pkey" unique="PRIMARY_KEY" >
+				<column name="id_bpe" />
+			</index>
+			<index name="unq_bpe_fk_noeud" unique="UNIQUE" >
+				<column name="fk_noeud" />
+			</index>
+			<index name="idx_bpe_fk_chambre" unique="NORMAL" >
+				<column name="fk_chambre" />
+			</index>
+			<index name="idx_bpe_fk_proprio" unique="NORMAL" >
+				<column name="fk_proprio" />
+			</index>
+			<index name="idx_bpe_fk_gestion" unique="NORMAL" >
+				<column name="fk_gestion" />
+			</index>
+			<fk name="fk_bpe_noeud" to_schema="GEO_FREE" to_table="noeud" >
+				<fk_column name="fk_noeud" pk="id_noeud" />
+			</fk>
+			<fk name="fk_bpe_chambre" to_schema="GEO_FREE" to_table="chambre" >
+				<fk_column name="fk_chambre" pk="id_chambre" />
+			</fk>
+			<fk name="fk_bpe_proprio-gestion" to_schema="GEO_FREE" to_table="proprio-gestion" >
+				<fk_column name="fk_proprio" pk="id_proprio-gestion" />
+			</fk>
+			<fk name="fk_bpe_proprio-gestion_0" to_schema="GEO_FREE" to_table="proprio-gestion" >
+				<fk_column name="fk_gestion" pk="id_proprio-gestion" />
+			</fk>
+			<fk name="fk_bpe_user" to_schema="GEO_FREE" to_table="user" >
+				<fk_column name="fk_user-maj" pk="id_user" />
+			</fk>
+		</table>
+		<table name="cable" >
+			<column name="geom" type="geometry" decimal="0" jt="1111" />
+			<column name="id_cable" type="integer" jt="4" mandatory="y" />
+			<column name="fk_fourreau" type="integer" length="10" decimal="0" jt="4" />
+			<column name="fk_artere" type="integer" length="10" decimal="0" jt="4" />
+			<column name="code" type="varchar" decimal="0" jt="12" />
+			<column name="longueur-reel" type="numeric" decimal="0" jt="2" />
+			<column name="diametre_exterieur" type="float8" length="17" decimal="17" jt="6" />
+			<column name="techno" type="varchar" decimal="0" jt="12" />
+			<column name="synbolisation" type="varchar" decimal="0" jt="12" />
+			<column name="emprise" type="varchar" decimal="0" jt="12" />
+			<column name="fibre_nombre" type="varchar" length="3" decimal="0" jt="12" />
+			<column name="tube_nombre" type="varchar" length="2" decimal="0" jt="12" />
+			<column name="fibre_utilise" type="varchar" length="3" decimal="0" jt="12" />
+			<column name="fibre_dispo" type="varchar" length="3" decimal="0" jt="12" />
+			<column name="ref_cable" type="varchar" decimal="0" jt="12" />
+			<column name="fabricant" type="varchar" decimal="0" jt="12" />
+			<column name="fk_etat" type="integer" length="10" decimal="0" jt="4" />
+			<column name="date_install" type="date" length="13" decimal="0" jt="91" />
+			<column name="date_dernier_incident" type="date" length="13" decimal="0" jt="91" />
+			<column name="commentaire_dernier_incident" type="varchar" decimal="0" jt="12" />
+			<column name="fk_proprio" type="integer" length="10" decimal="0" jt="4" />
+			<column name="fk_gestion" type="integer" length="10" decimal="0" jt="4" />
+			<column name="fk_geoloc-class" type="integer" length="10" decimal="0" jt="4" />
+			<column name="fk_source-geoloc" type="integer" length="10" decimal="0" jt="4" />
+			<column name="date_maj" type="date" length="13" decimal="0" jt="91" />
+			<column name="fk_user-maj" type="integer" length="10" decimal="0" jt="4" />
+			<index name="pk_cable_id_cable" unique="PRIMARY_KEY" >
+				<column name="id_cable" />
+			</index>
+			<index name="idx_cable_fk_fourreau" unique="NORMAL" >
+				<column name="fk_fourreau" />
+			</index>
+			<index name="idx_cable_fk_artere" unique="NORMAL" >
+				<column name="fk_artere" />
+			</index>
+			<index name="idx_cable_fk_etat" unique="NORMAL" >
+				<column name="fk_etat" />
+			</index>
+			<index name="idx_cable_fk_proprio" unique="NORMAL" >
+				<column name="fk_proprio" />
+			</index>
+			<index name="idx_cable_fk_gestion" unique="NORMAL" >
+				<column name="fk_gestion" />
+			</index>
+			<fk name="fk_cable_fourreau" to_schema="GEO_FREE" to_table="fourreau" >
+				<fk_column name="fk_fourreau" pk="id_fourreau" />
+			</fk>
+			<fk name="fk_cable_artere" to_schema="GEO_FREE" to_table="artere" >
+				<fk_column name="fk_artere" pk="id_artere" />
+			</fk>
+			<fk name="fk_cable_etat" to_schema="GEO_FREE" to_table="etat" >
+				<fk_column name="fk_etat" pk="id_etat" />
+			</fk>
+			<fk name="fk_cable_proprio-gestion" to_schema="GEO_FREE" to_table="proprio-gestion" >
+				<fk_column name="fk_proprio" pk="id_proprio-gestion" />
+			</fk>
+			<fk name="fk_cable_proprio-gestion_0" to_schema="GEO_FREE" to_table="proprio-gestion" >
+				<fk_column name="fk_gestion" pk="id_proprio-gestion" />
+			</fk>
+			<fk name="fk_cable_geoloc-class" to_schema="GEO_FREE" to_table="geoloc-class" >
+				<fk_column name="fk_geoloc-class" pk="id_geoloc-class" />
+			</fk>
+			<fk name="fk_cable_source-geoloc" to_schema="GEO_FREE" to_table="source-geoloc" >
+				<fk_column name="fk_source-geoloc" pk="id_source-geoloc" />
+			</fk>
+			<fk name="fk_cable_user" to_schema="GEO_FREE" to_table="user" >
+				<fk_column name="fk_user-maj" pk="id_user" />
+			</fk>
+		</table>
+		<table name="chambre" >
+			<column name="id_chambre" type="serial" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="fk_noeud" type="integer" length="10" decimal="0" jt="4" />
+			<column name="fk_implantation" type="integer" length="10" decimal="0" jt="4" />
+			<column name="fk_type-chambre" type="integer" length="10" decimal="0" jt="4" />
+			<column name="ussage" type="varchar" decimal="0" jt="12" />
+			<column name="vue-haut_photo" type="varchar" decimal="0" jt="12" />
+			<column name="environ_Photo" type="varchar" decimal="0" jt="12" />
+			<index name="chambre_pkey" unique="PRIMARY_KEY" >
+				<column name="id_chambre" />
+			</index>
+			<index name="idx_chambre_fk_noeud" unique="NORMAL" >
+				<column name="fk_noeud" />
+			</index>
+			<index name="idx_chambre_fk_implantation" unique="NORMAL" >
+				<column name="fk_implantation" />
+			</index>
+			<fk name="fk_chambre_noeud" to_schema="GEO_FREE" to_table="noeud" >
+				<fk_column name="fk_noeud" pk="id_noeud" />
+			</fk>
+			<fk name="fk_chambre_implantation" to_schema="GEO_FREE" to_table="implantation" >
+				<fk_column name="fk_implantation" pk="id_implantation" />
+			</fk>
+			<fk name="fk_chambre_type-tranchee" to_schema="GEO_FREE" to_table="type-tranchee" >
+				<fk_column name="fk_type-chambre" pk="id_type-tranchee" />
+			</fk>
+		</table>
+		<table name="commune" >
+			<column name="geom" type="geometry" decimal="0" jt="1111" />
+			<column name="id_commune" type="integer" jt="4" mandatory="y" />
+			<column name="id_geofla" type="varchar" length="24" decimal="0" jt="12" />
+			<column name="code_com" type="varchar" length="3" decimal="0" jt="12" />
+			<column name="insee_com" type="varchar" length="5" decimal="0" jt="12" />
+			<column name="nom_com" type="varchar" length="50" decimal="0" jt="12" />
+			<column name="statut" type="varchar" length="25" decimal="0" jt="12" />
+			<column name="x_chf_lieu" type="integer" length="10" decimal="0" jt="4" />
+			<column name="y_chf_lieu" type="integer" length="10" decimal="0" jt="4" />
+			<column name="x_centroid" type="integer" length="10" decimal="0" jt="4" />
+			<column name="y_centroid" type="integer" length="10" decimal="0" jt="4" />
+			<column name="z_moyen" type="integer" length="10" decimal="0" jt="4" />
+			<column name="superficie" type="bigint" length="19" decimal="0" jt="-5" />
+			<column name="population" type="bigint" length="19" decimal="0" jt="-5" />
+			<column name="code_arr" type="varchar" length="1" decimal="0" jt="12" />
+			<column name="code_dept" type="varchar" length="2" decimal="0" jt="12" />
+			<column name="nom_dept" type="varchar" length="30" decimal="0" jt="12" />
+			<column name="code_reg" type="varchar" length="2" decimal="0" jt="12" />
+			<column name="nom_reg" type="varchar" length="35" decimal="0" jt="12" />
+			<index name="pk_commune_id_commune" unique="PRIMARY_KEY" >
+				<column name="id_commune" />
+			</index>
+		</table>
+		<table name="couleur-fo" >
+			<column name="id_couleur-fo" type="integer" jt="4" mandatory="y" />
+			<column name="numero_fibre" type="integer" length="10" decimal="0" jt="4" />
+			<column name="couleur" type="varchar" decimal="0" jt="12" />
+			<column name="code_html" type="varchar" length="7" decimal="0" jt="12" />
+			<column name="couleur_courte" type="varchar" decimal="0" jt="12" />
+			<index name="pk_couleur-fo_id_couleur-fo" unique="PRIMARY_KEY" >
+				<column name="id_couleur-fo" />
+			</index>
+		</table>
+		<table name="etat" >
+			<column name="id_etat" type="serial" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="etat" type="varchar" decimal="0" jt="12" />
+			<index name="etat_pkey" unique="PRIMARY_KEY" >
+				<column name="id_etat" />
+			</index>
+		</table>
+		<table name="fourreau" >
+			<column name="id_fourreau" type="integer" jt="4" mandatory="y" />
+			<column name="fk_artere" type="integer" length="10" decimal="0" jt="4" />
+			<column name="fk_type-conduite" type="integer" length="10" decimal="0" jt="4" />
+			<column name="fk_etat" type="integer" length="10" decimal="0" jt="4" />
+			<column name="nombre" type="varchar" length="1" decimal="0" jt="12" />
+			<column name="diametre-ext" type="numeric" decimal="0" jt="2" />
+			<column name="diametre-int" type="numeric" decimal="0" jt="2" />
+			<column name="fourreau-vide" type="varchar" decimal="0" jt="12" />
+			<column name="creation_date" type="date" length="13" decimal="0" jt="91" />
+			<column name="aiguillage_date" type="date" length="13" decimal="0" jt="91" />
+			<column name="mandrinage_date" type="date" length="13" decimal="0" jt="91" />
+			<column name="fk_proprio" type="integer" length="10" decimal="0" jt="4" />
+			<column name="fk_gestion" type="integer" length="10" decimal="0" jt="4" />
+			<column name="date_maj" type="date" length="13" decimal="0" jt="91" />
+			<column name="fk_user-maj" type="integer" length="10" decimal="0" jt="4" />
+			<index name="pk_fourreau_id_fourreau" unique="PRIMARY_KEY" >
+				<column name="id_fourreau" />
+			</index>
+			<index name="unq_fourreau_nombre" unique="UNIQUE" >
+				<column name="nombre" />
+			</index>
+			<index name="idx_fourreau_fk_artere" unique="NORMAL" >
+				<column name="fk_artere" />
+			</index>
+			<index name="idx_fourreau_fk_etat" unique="NORMAL" >
+				<column name="fk_etat" />
+			</index>
+			<index name="idx_fourreau_fk_proprio" unique="NORMAL" >
+				<column name="fk_proprio" />
+			</index>
+			<index name="idx_fourreau_fk_gestion" unique="NORMAL" >
+				<column name="fk_gestion" />
+			</index>
+			<fk name="fk_fourreau_artere" to_schema="GEO_FREE" to_table="artere" >
+				<fk_column name="fk_artere" pk="id_artere" />
+			</fk>
+			<fk name="fk_fourreau_type-conduite" to_schema="GEO_FREE" to_table="type-conduite" >
+				<fk_column name="fk_type-conduite" pk="id_type-conduite" />
+			</fk>
+			<fk name="fk_fourreau_etat" to_schema="GEO_FREE" to_table="etat" >
+				<fk_column name="fk_etat" pk="id_etat" />
+			</fk>
+			<fk name="fk_fourreau_proprio-gestion" to_schema="GEO_FREE" to_table="proprio-gestion" >
+				<fk_column name="fk_proprio" pk="id_proprio-gestion" />
+			</fk>
+			<fk name="fk_fourreau_proprio-gestion_0" to_schema="GEO_FREE" to_table="proprio-gestion" >
+				<fk_column name="fk_gestion" pk="id_proprio-gestion" />
+			</fk>
+			<fk name="fk_fourreau_user" to_schema="GEO_FREE" to_table="user" >
+				<fk_column name="fk_user-maj" pk="id_user" />
+			</fk>
+		</table>
+		<table name="geoloc-class" >
+			<column name="id_geoloc-class" type="serial" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="class" type="varchar" decimal="0" jt="12" />
+			<column name="description" type="varchar" decimal="0" jt="12" />
+			<index name="geoloc-class_pkey" unique="PRIMARY_KEY" >
+				<column name="id_geoloc-class" />
+			</index>
+		</table>
+		<table name="implantation" >
+			<column name="id_implantation" type="serial" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="implantation" type="varchar" decimal="0" jt="12" />
+			<column name="description" type="varchar" decimal="0" jt="12" />
+			<index name="implantation_pkey" unique="PRIMARY_KEY" >
+				<column name="id_implantation" />
+			</index>
+		</table>
+		<table name="local_tech" >
+			<column name="id_local_tech" type="serial" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="fk_noeud" type="integer" length="10" decimal="0" jt="4" />
+			<column name="fk_local_type" type="integer" length="10" decimal="0" jt="4" />
+			<column name="nom" type="varchar" length="30" decimal="0" jt="12" />
+			<column name="code" type="varchar" length="20" decimal="0" jt="12" />
+			<column name="baie" type="varchar" length="2" decimal="0" jt="12" />
+			<column name="ferme" type="varchar" length="2" decimal="0" jt="12" />
+			<column name="niveau" type="varchar" length="2" decimal="0" jt="12" />
+			<column name="position" type="varchar" length="2" decimal="0" jt="12" />
+			<index name="local_tech_pkey" unique="PRIMARY_KEY" >
+				<column name="id_local_tech" />
+			</index>
+		</table>
+		<table name="mode_pose" >
+			<column name="id_mode_pose" type="serial" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="pose" type="varchar" decimal="0" jt="12" />
+			<index name="mode_pose_pkey" unique="PRIMARY_KEY" >
+				<column name="id_mode_pose" />
+			</index>
+		</table>
+		<table name="noeud" >
+			<column name="id_noeud" type="serial" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="geom" type="geometry" decimal="0" jt="1111" />
+			<column name="fk_commune" type="integer" length="10" decimal="0" jt="4" />
+			<column name="nom" type="varchar" decimal="0" jt="12" />
+			<column name="numero_voie" type="varchar" length="4" decimal="0" jt="12" />
+			<column name="voie" type="varchar" decimal="0" jt="12" />
+			<column name="type_noeud" type="varchar" decimal="0" jt="12" />
+			<column name="photo" type="varchar" decimal="0" jt="12" />
+			<column name="date_creation" type="date" length="13" decimal="0" jt="91" />
+			<column name="date_maj" type="date" length="13" decimal="0" jt="91" />
+			<column name="fk_user-maj" type="integer" length="10" decimal="0" jt="4" />
+			<column name="fk_gestion" type="integer" length="10" decimal="0" jt="4" />
+			<column name="fk_proprio" type="integer" length="10" decimal="0" jt="4" />
+			<column name="fk_geoloc-class" type="integer" length="10" decimal="0" jt="4" />
+			<column name="fk_source_geoloc" type="integer" length="10" decimal="0" jt="4" />
+			<index name="noeud_pkey" unique="PRIMARY_KEY" >
+				<column name="id_noeud" />
+			</index>
+			<index name="idx_noeud_fk_gestion" unique="NORMAL" >
+				<column name="fk_gestion" />
+			</index>
+			<index name="idx_noeud_fk_proprio" unique="NORMAL" >
+				<column name="fk_proprio" />
+			</index>
+			<index name="idx_noeud_fk_source_geoloc" unique="NORMAL" >
+				<column name="fk_source_geoloc" />
+			</index>
+			<fk name="fk_noeud_user" to_schema="GEO_FREE" to_table="user" >
+				<fk_column name="fk_user-maj" pk="id_user" />
+			</fk>
+			<fk name="fk_noeud_proprio-gestion" to_schema="GEO_FREE" to_table="proprio-gestion" >
+				<fk_column name="fk_gestion" pk="id_proprio-gestion" />
+			</fk>
+			<fk name="fk_noeud_proprio-gestion_0" to_schema="GEO_FREE" to_table="proprio-gestion" >
+				<fk_column name="fk_proprio" pk="id_proprio-gestion" />
+			</fk>
+			<fk name="fk_noeud_geoloc-class" to_schema="GEO_FREE" to_table="geoloc-class" >
+				<fk_column name="fk_geoloc-class" pk="id_geoloc-class" />
+			</fk>
+			<fk name="fk_noeud_source-geoloc" to_schema="GEO_FREE" to_table="source-geoloc" >
+				<fk_column name="fk_source_geoloc" pk="id_source-geoloc" />
+			</fk>
+		</table>
+		<table name="proprio-gestion" >
+			<column name="id_proprio-gestion" type="serial" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="nom" type="varchar" decimal="0" jt="12" />
+			<column name="premon" type="varchar" decimal="0" jt="12" />
+			<column name="telephone" type="varchar" decimal="0" jt="12" />
+			<column name="mail" type="varchar" decimal="0" jt="12" />
+			<column name="fonction" type="varchar" decimal="0" jt="12" />
+			<column name="service" type="varchar" decimal="0" jt="12" />
+			<column name="entite" type="varchar" decimal="0" jt="12" />
+			<column name="fk_escalate" type="integer" length="10" decimal="0" jt="4" />
+			<index name="proprio-gestion_pkey" unique="PRIMARY_KEY" >
+				<column name="id_proprio-gestion" />
+			</index>
+		</table>
+		<table name="soudure" >
+			<column name="id_soudure" type="serial" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="fk_bpe" type="integer" length="10" decimal="0" jt="4" />
+			<column name="fk_chambre" type="integer" length="10" decimal="0" jt="4" />
+			<column name="fk_cable-in" type="integer" length="10" decimal="0" jt="4" />
+			<column name="fk_cable-out" type="integer" length="10" decimal="0" jt="4" />
+			<column name="cassette" type="varchar" length="3" decimal="0" jt="12" />
+			<column name="fk_couleur-fo" type="integer" length="10" decimal="0" jt="4" />
+			<column name="fk_tube-fo" type="integer" length="10" decimal="0" jt="4" />
+			<column name="date_maj" type="date" length="13" decimal="0" jt="91" />
+			<column name="fk_user-maj" type="integer" length="10" decimal="0" jt="4" />
+			<index name="soudure_pkey" unique="PRIMARY_KEY" >
+				<column name="id_soudure" />
+			</index>
+			<index name="idx_soudure_fk_chambre" unique="NORMAL" >
+				<column name="fk_chambre" />
+			</index>
+			<index name="idx_soudure_fk_bpe" unique="NORMAL" >
+				<column name="fk_bpe" />
+			</index>
+			<fk name="fk_soudure_chambre" to_schema="GEO_FREE" to_table="chambre" >
+				<fk_column name="fk_chambre" pk="id_chambre" />
+			</fk>
+			<fk name="fk_soudure_bpe" to_schema="GEO_FREE" to_table="bpe" >
+				<fk_column name="fk_bpe" pk="id_bpe" />
+			</fk>
+			<fk name="fk_soudure_cable" to_schema="GEO_FREE" to_table="cable" >
+				<fk_column name="fk_cable-in" pk="id_cable" />
+			</fk>
+			<fk name="fk_soudure_cable_0" to_schema="GEO_FREE" to_table="cable" >
+				<fk_column name="fk_cable-out" pk="id_cable" />
+			</fk>
+			<fk name="fk_soudure_couleur-fo" to_schema="GEO_FREE" to_table="couleur-fo" >
+				<fk_column name="fk_couleur-fo" pk="id_couleur-fo" />
+			</fk>
+			<fk name="fk_soudure_tube-fo" to_schema="GEO_FREE" to_table="tube-fo" >
+				<fk_column name="fk_tube-fo" pk="id_tube-fo" />
+			</fk>
+			<fk name="fk_soudure_user" to_schema="GEO_FREE" to_table="user" >
+				<fk_column name="fk_user-maj" pk="id_user" />
+			</fk>
+		</table>
+		<table name="source-geoloc" >
+			<column name="id_source-geoloc" type="serial" length="10" decimal="0" jt="4" mandatory="y" autoincrement="y" />
+			<column name="source" type="varchar" decimal="0" jt="12" />
+			<column name="description" type="varchar" decimal="0" jt="12" />
+			<index name="source-geoloc_pkey" unique="PRIMARY_KEY" >
+				<column name="id_source-geoloc" />
+			</index>
+		</table>
+		<table name="tranchee" >
+			<column name="geom" type="geometry" decimal="0" jt="1111" />
+			<column name="id_tranchee" type="integer" jt="4" mandatory="y" />
+			<column name="fk_artere" type="integer" length="10" decimal="0" jt="4" />
+			<column name="fk_commune" type="integer" length="10" decimal="0" jt="4" />
+			<column name="voie_tranchee" type="varchar" decimal="0" jt="12" />
+			<column name="fk_type-tranchee" type="integer" length="10" decimal="0" jt="4" />
+			<column name="longueur" type="numeric" decimal="0" jt="2" />
+			<column name="largeur" type="numeric" decimal="0" jt="2" />
+			<column name="fk_implantation" type="integer" length="10" decimal="0" jt="4" />
+			<column name="remblaie" type="varchar" decimal="0" jt="12" />
+			<column name="charge" type="varchar" length="3" decimal="0" jt="12" />
+			<column name="grillage" type="varchar" decimal="0" jt="12" />
+			<column name="plinox" type="varchar" decimal="0" jt="12" />
+			<column name="convention" type="varchar" decimal="0" jt="12" />
+			<column name="fk_gestion" type="integer" length="10" decimal="0" jt="4" />
+			<column name="date_creation" type="date" length="13" decimal="0" jt="91" />
+			<column name="fk_geoloc-class" type="integer" length="10" decimal="0" jt="4" />
+			<column name="fk_source-geoloc" type="integer" length="10" decimal="0" jt="4" />
+			<column name="date_maj" type="date" length="13" decimal="0" jt="91" />
+			<column name="fk_user-maj" type="integer" length="10" decimal="0" jt="4" />
+			<index name="pk_tranchee_id_tranchee" unique="PRIMARY_KEY" >
+				<column name="id_tranchee" />
+			</index>
+			<fk name="fk_tranchee_artere" to_schema="GEO_FREE" to_table="artere" >
+				<fk_column name="fk_artere" pk="id_artere" />
+			</fk>
+			<fk name="fk_tranchee_commune" to_schema="GEO_FREE" to_table="commune" >
+				<fk_column name="fk_commune" pk="id_commune" />
+			</fk>
+			<fk name="fk_tranchee_proprio-gestion" to_schema="GEO_FREE" to_table="proprio-gestion" >
+				<fk_column name="fk_gestion" pk="id_proprio-gestion" />
+			</fk>
+			<fk name="fk_tranchee_geoloc-class_0" to_schema="GEO_FREE" to_table="geoloc-class" >
+				<fk_column name="fk_geoloc-class" pk="id_geoloc-class" />
+			</fk>
+			<fk name="fk_tranchee_source-geoloc_0" to_schema="GEO_FREE" to_table="source-geoloc" >
+				<fk_column name="fk_source-geoloc" pk="id_source-geoloc" />
+			</fk>
+			<fk name="fk_tranchee_user_0" to_schema="GEO_FREE" to_table="user" >
+				<fk_column name="fk_user-maj" pk="id_user" />
+			</fk>
+			<fk name="fk_tranchee_user_0" to_schema="GEO_FREE" to_table="user" >
+				<fk_column name="fk_user-maj" pk="id_user" />
+			</fk>
+			<fk name="fk_tranchee_geoloc-class_0" to_schema="GEO_FREE" to_table="geoloc-class" >
+				<fk_column name="fk_geoloc-class" pk="id_geoloc-class" />
+			</fk>
+			<fk name="fk_tranchee_source-geoloc_0" to_schema="GEO_FREE" to_table="source-geoloc" >
+				<fk_column name="fk_source-geoloc" pk="id_source-geoloc" />
+			</fk>
+		</table>
+		<table name="tube-fo" >
+			<column name="id_tube-fo" type="integer" jt="4" mandatory="y" />
+			<column name="numero_tube" type="varchar" length="2" decimal="0" jt="12" />
+			<column name="couleur" type="varchar" length="9" decimal="0" jt="12" />
+			<column name="bague-noire" type="varchar" length="1" decimal="0" jt="12" />
+			<column name="code_html" type="varchar" length="7" decimal="0" jt="12" />
+			<index name="pk_tube-fo_id_tube-fo" unique="PRIMARY_KEY" >
+				<column name="id_tube-fo" />
+			</index>
+		</table>
+		<table name="type-chambre" >
+			<column name="id_type-chambre" type="integer" jt="4" mandatory="y" />
+			<column name="type" type="varchar" length="4" decimal="0" jt="12" />
+			<column name="description" type="varchar" decimal="0" jt="12" />
+			<index name="pk_type-chambre_id_type-chambre" unique="PRIMARY_KEY" >
+				<column name="id_type-chambre" />
+			</index>
+		</table>
+		<table name="type-conduite" >
+			<column name="id_type-conduite" type="integer" jt="4" mandatory="y" />
+			<column name="type" type="varchar" decimal="0" jt="12" />
+			<column name="description" type="varchar" decimal="0" jt="12" />
+			<index name="pk_type-conduite_id_type-conduite" unique="PRIMARY_KEY" >
+				<column name="id_type-conduite" />
+			</index>
+		</table>
+		<table name="type-construction" >
+			<column name="id_type-construction" type="integer" jt="4" mandatory="y" />
+			<column name="construction" type="varchar" decimal="0" jt="12" />
+			<column name="description" type="varchar" decimal="0" jt="12" />
+			<index name="pk_type-construction_id_type-construction" unique="PRIMARY_KEY" >
+				<column name="id_type-construction" />
+			</index>
+		</table>
+		<table name="type-tranchee" >
+			<column name="id_type-tranchee" type="integer" jt="4" mandatory="y" />
+			<column name="tranchee" type="varchar" decimal="0" jt="12" />
+			<column name="description" type="varchar" decimal="0" jt="12" />
+			<index name="pk_type-tranchee_id_type-tranchee" unique="PRIMARY_KEY" >
+				<column name="id_type-tranchee" />
+			</index>
+		</table>
+		<table name="user" >
+			<column name="id_user" type="integer" jt="4" mandatory="y" />
+			<column name="login" type="varchar" length="10" decimal="0" jt="12" />
+			<column name="passwd" type="varchar" length="10" decimal="0" jt="12" />
+			<column name="nom" type="varchar" length="15" decimal="0" jt="12" />
+			<column name="premon" type="varchar" length="15" decimal="0" jt="12" />
+			<column name="mail" type="varchar" length="20" decimal="0" jt="12" />
+			<column name="gsm" type="varchar" length="8" decimal="0" jt="12" />
+			<column name="telephone" type="varchar" length="8" decimal="0" jt="12" />
+			<column name="fonction" type="varchar" length="10" decimal="0" jt="12" />
+			<column name="service" type="varchar" length="10" decimal="0" jt="12" />
+			<column name="entite" type="varchar" length="10" decimal="0" jt="12" />
+			<index name="pk_user_id_user" unique="PRIMARY_KEY" >
+				<column name="id_user" />
+			</index>
+		</table>
+		<sequence name="bpe_id_seq" start="1" />
+		<sequence name="cable_id_seq" start="1" />
+		<sequence name="chambre_id_seq" start="1" />
+		<sequence name="commune_id_seq" start="1" />
+		<sequence name="couleur-fo_id_seq" start="1" />
+		<sequence name="etat_id_seq" start="1" />
+		<sequence name="fourreau_id_seq" start="1" />
+		<sequence name="geoloc-class_id_seq" start="1" />
+		<sequence name="implantation_id_seq" start="1" />
+		<sequence name="local_tech_id_seq" start="1" />
+		<sequence name="mode_pose_id_seq" start="1" />
+		<sequence name="noeud_id_seq" start="1" />
+		<sequence name="proprio-gestion_id_seq" start="1" />
+		<sequence name="soudure_id_seq" start="1" />
+		<sequence name="source-geoloc_id_seq" start="1" />
+		<sequence name="tube-fo_id_seq" start="1" />
+		<sequence name="type-chambre_id_seq" start="1" />
+		<sequence name="type-conduite_id_seq" start="1" />
+		<sequence name="type-construction_id_seq" start="1" />
+		<sequence name="type-tranchee_id_seq" start="1" />
+		<sequence name="user_id_seq" start="1" />
+	</schema>
+	<connector name="LY-SER" database="PostgreSQL" driver_class="org.postgresql.Driver" driver_jar="postgresql-42.2.2.jar" driver_desc="Standard" host="192.168.0.1" port="5432" instance="SIG_TEST" user="postgres" passwd="Qydlc3QgbW9pIDE2" />
+	<connector name="PostgreSQL" database="PostgreSQL" driver_class="org.postgresql.Driver" driver_jar="postgresql-42.2.2.jar" driver_desc="Standard" host="localhost" port="5432" instance="GeoFree" user="cyrille_macbook" passwd="UGlhLXBpYTE2" />
+	<connector name="VPS" database="PostgreSQL" driver_class="org.postgresql.Driver" driver_jar="postgresql-42.2.2.jar" driver_desc="Standard" host="vps153519.vps.ovh.ca" port="5432" instance="carto" user="postgres" passwd="UGlhLXBpYTE2" />
+	<layout name="Default Layout" id="Layout_3a58069" show_relation="columns" >
+		<comment><![CDATA[carto]]></comment>
+		<entity schema="GEO_FREE" name="type-tranchee" color="3986C1" x="1392" y="272" />
+		<entity schema="GEO_FREE" name="type-chambre" color="3986C1" x="1984" y="272" />
+		<entity schema="GEO_FREE" name="local_tech" color="3986C1" x="1984" y="432" />
+		<entity schema="GEO_FREE" name="type-construction" color="3986C1" x="1584" y="272" />
+		<entity schema="GEO_FREE" name="couleur-fo" color="3986C1" x="1584" y="432" />
+		<entity schema="GEO_FREE" name="implantation" color="3986C1" x="1792" y="432" />
+		<entity schema="GEO_FREE" name="mode_pose" color="3986C1" x="1408" y="432" />
+		<entity schema="GEO_FREE" name="proprio-gestion" color="3986C1" x="1200" y="272" />
+		<entity schema="GEO_FREE" name="geoloc-class" color="3986C1" x="1024" y="560" />
+		<entity schema="GEO_FREE" name="type-conduite" color="3986C1" x="1792" y="272" />
+		<entity schema="GEO_FREE" name="source-geoloc" color="3986C1" x="1200" y="560" />
+		<entity schema="GEO_FREE" name="etat" color="3986C1" x="1040" y="128" />
+		<entity schema="GEO_FREE" name="user" color="3986C1" x="1040" y="272" />
+		<entity schema="GEO_FREE" name="tranchee" color="3986C1" x="640" y="80" />
+		<entity schema="GEO_FREE" name="artere" color="3986C1" x="368" y="80" />
+		<entity schema="GEO_FREE" name="noeud" color="3986C1" x="368" y="560" />
+		<entity schema="GEO_FREE" name="chambre" color="3986C1" x="624" y="976" />
+		<entity schema="GEO_FREE" name="fourreau" color="3986C1" x="112" y="144" />
+		<entity schema="GEO_FREE" name="bpe" color="3986C1" x="624" y="608" />
+		<entity schema="GEO_FREE" name="tube-fo" color="3986C1" x="1200" y="80" />
+		<entity schema="GEO_FREE" name="soudure" color="3986C1" x="368" y="1152" />
+		<entity schema="GEO_FREE" name="commune" color="3986C1" x="864" y="144" />
+		<entity schema="GEO_FREE" name="cable" color="3986C1" x="48" y="560" />
+		<group name="Group_data" color="C4E0F9" >
+			<entity schema="GEO_FREE" name="tube-fo" />
+			<entity schema="GEO_FREE" name="type-tranchee" />
+			<entity schema="GEO_FREE" name="type-chambre" />
+			<entity schema="GEO_FREE" name="local_tech" />
+			<entity schema="GEO_FREE" name="type-construction" />
+			<entity schema="GEO_FREE" name="couleur-fo" />
+			<entity schema="GEO_FREE" name="type-conduite" />
+			<entity schema="GEO_FREE" name="source-geoloc" />
+			<entity schema="GEO_FREE" name="implantation" />
+			<entity schema="GEO_FREE" name="geoloc-class" />
+			<entity schema="GEO_FREE" name="etat" />
+			<entity schema="GEO_FREE" name="mode_pose" />
+			<entity schema="GEO_FREE" name="user" />
+			<entity schema="GEO_FREE" name="proprio-gestion" />
+			<entity schema="GEO_FREE" name="commune" />
+		</group>
+	</layout>
+</project>

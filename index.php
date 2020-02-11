@@ -1,49 +1,38 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>LeftLet Tuto</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
-      integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
-      crossorigin=""/>
-    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
-      integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
-      crossorigin=""></script>
-    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <style>
-    html, body { margin:50px 0; padding:0; }
-    #map {
-		      height: 800px; width:100%; margin:0 auto;
-		      -webkit-box-shadow: 0 2px 3px 3px rgba(0,0,0,0.2);
-		      box-shadow: 0 2px 3px 3px rgba(0,0,0,0.2);
-		      -webkit-border-radius: 5px;
-		      border-radius: 5px;
-	       }
-</style>
-</head>
+    <head>
+        <title>Carto à nous</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <!-- appelle la librairie javascript Leaflet et le fichier CSS Leaflet -->	
+			<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css" 
+			integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" 
+			crossorigin="">
+   		<script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js" 
+   		integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q==" 
+   		crossorigin=""></script>	
+   		<!-- lien vers mon fichier CSS -->
+			<link rel="stylesheet" href="./css/style.css" />
+			<link rel="stylesheet" href="./src/leaflet-search.css" />
+			<!-- jQuery - indispensable pour utiliser les fichiers geojson -->
+			<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+			<script src="./src/leaflet-search.js"></script>
 
-<body>
-	<div id="map"></div>
-    <script type="text/javascript">
-		var map = L.map('map', { zoomControl:true }).setView([45.776791, 3.082163], 13);
-		map.dragging.enable();
-		map.touchZoom.enable();
-		map.doubleClickZoom.enable();
-		map.scrollWheelZoom.enable();
-
-		L.tileLayer('http://{s}.tiles.wmflabs.org/bw-mapnik/{z}/{x}/{y}.png', {
-	     maxZoom: 20,
-	     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-		}).addTo(map);
-    // Echelle
-    L.control.scale().addTo(map);
-    //layer
-		/*var marker = L.marker([48.804128, 7.776792]).addTo(map).bindPopup("<b>LIJE Creative</b>");*/
-    $.getJSON("clermont.geojson", function(Clermont){
-      L.geoJson( Clermont ).addTo(map);
-    });
-    //Contrôles pour les layers contenant les données.
-    L.control.layers().addTo(map);
-	</script>
-</body>
+    </head>
+	<body onload="initialize()">
+		<div class="MainBody">    
+        <div class="header" >
+            <h3>Carto à Nous</h3>
+        </div>
+        <div class="center">
+            <div id="mapid"></div>
+            <script src="./js/maps.js"></script>
+        </div>
+        <div class="right">
+            <h2> </h2>
+        </div>
+        <div class="footer">
+            <h3> </h3>
+        </div>
+		</div> 
+    </body>
 </html>
