@@ -1,6 +1,6 @@
 <?php
 $host='localhost';
-$db = 'SIG';
-$username = 'postgres';
-$password = 'Pia-pia16';
+$db = 'db';
+$username = 'ps';
+$password = '';
 ?>
